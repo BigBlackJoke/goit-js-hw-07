@@ -12,25 +12,27 @@ const deleteButton = controls.children[2];
 
 const boxes = document.querySelector("#boxes");
 
-let size = 30;
-
 function createBoxes(amount) {
+    let size = 30;
     boxes.innerHTML = '';
+    const boxWithAllBoxes = document.createDocumentFragment();
     for (let i = 0; i < amount; i++) {
         const box = document.createElement("div");
-        boxes.append(box);
         box.style.width = `${size}px`;
         box.style.height = `${size}px`;
         box.style.backgroundColor = getRandomHexColor();
+        boxWithAllBoxes.append(box);
         size += 10;
     }
+
+    boxes.append(boxWithAllBoxes);
 }
 
 
 createButton.addEventListener("click", () => {
     const amount = input.value.trim();
     if (amount < 1 || amount > 100) {
-        alert('Please give proper value');
+        console.warn('Please give proper value');
     } else {
         createBoxes(amount);
         input.value = '';
